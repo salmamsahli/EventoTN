@@ -1,0 +1,903 @@
+/* =============================================================
+   EVENTOTN — Complete Stylesheet
+   HTML + CSS only, no JavaScript.
+   ============================================================= */
+
+/* 1. DESIGN TOKENS — Change colors, max-width, header height here
+   ============================================================= */
+:root {
+  --bg:               #ffffff;       /* main background */
+  --bg-warm:          #faf5f0;       /* warm beige sections bg */
+  --bg-cool:          #eae4f5;       /* cool purple sections bg */
+  --bg-footer:        #f2f2f2;       /* footer background */
+  --text:             #1b1534;       /* primary text color */
+  --text-secondary:   #616161;       /* secondary/muted text */
+  --accent:           #6b2fa0;       /* purple accent (brand, chips, buttons) */
+  --link-blue:        #0067b8;       /* blue links */
+  --btn-primary-bg:   #1b1534;       /* dark button background */
+  --btn-primary-text: #ffffff;       /* dark button text */
+  --border:           #e0e0e0;       /* borders & dividers */
+  --badge-person-bg:  #f5e6d0;       /* "In person" badge bg */
+  --badge-person-text:#8b5e2f;       /* "In person" badge text */
+  --badge-digital-bg: #e8e0f0;       /* "Digital" badge bg */
+  --badge-digital-text:#5a3d8a;      /* "Digital" badge text */
+  --max-w:            1200px;        /* max content width */
+  --header-h:         64px;          /* header height */
+}
+
+/* 2. RESET — Base styles, don't change unless you know what you're doing
+   ============================================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  font-size:15px;line-height:1.6;
+  color:var(--text-secondary);
+  background:var(--bg);
+  min-height:100vh;overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button,input,textarea,select{font:inherit}
+
+/* 3. UTILITIES — Reusable classes for layout & section headings
+   ============================================================= */
+.container{width:min(var(--max-w),calc(100% - 2rem));margin-inline:auto} /* centered content wrapper */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)} /* screen-reader only */
+
+/* Section heading styles — used in every section's label, title, desc */
+.section-label{
+  font-size:.78rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--accent);margin-bottom:.5rem;
+}
+.section-title{
+  font-size:clamp(1.6rem,3vw,2.25rem);font-weight:700;
+  color:var(--text);margin-bottom:.5rem;line-height:1.25;
+}
+.section-desc{
+  color:var(--text-secondary);max-width:70ch;margin-bottom:1.5rem;
+}
+.text-center{text-align:center}
+.mx-auto{margin-inline:auto}
+
+/* 4. BUTTONS — All button styles (.btn, .btn-primary, .btn-outline, etc.)
+   ============================================================= */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+  padding:.6rem 1.35rem;font-size:.875rem;font-weight:600;
+  border-radius:999px;border:1px solid transparent;cursor:pointer;
+  transition:background .15s,box-shadow .15s,border-color .15s;
+  text-decoration:none;white-space:nowrap;
+}
+.btn-primary{
+  background:var(--btn-primary-bg);color:var(--btn-primary-text);
+  border-color:var(--btn-primary-bg);
+}
+.btn-primary:hover{background:#2d2650;border-color:#2d2650}
+.btn-outline{
+  background:var(--bg);color:var(--text);border-color:var(--border);
+}
+.btn-outline:hover{border-color:var(--text-secondary);background:#f9f9f9}
+.btn-sm{padding:.4rem .85rem;font-size:.8rem}
+.btn-white{background:#fff;color:var(--text);border-color:var(--border)}
+.btn-white:hover{background:#f5f5f5}
+
+/* 5. HEADER — Sticky top bar: logo, nav, dropdowns, CTA button
+   ============================================================= */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{
+  display:flex;align-items:center;height:var(--header-h);gap:1rem;
+  position:relative;
+}
+/* Brand / Logo — Change logo text size, font-weight, gradient colors here */
+.brand{display:flex;align-items:center;gap:.55rem;flex-shrink:0;color:var(--text);text-decoration:none}
+.brand-ms{font-size:1.35rem;font-weight:800;letter-spacing:-.5px;background:linear-gradient(135deg,var(--accent),#005a9e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text} /* gradient text logo */
+.brand-sep{display:none}
+.brand-name{display:none}
+
+/* Hamburger (hidden on desktop) */
+.ham-input{display:none}
+.hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  cursor:pointer;padding:4px;flex-shrink:0;
+}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:.2s}
+
+/* Nav */
+.nav{display:flex;align-items:center;gap:0;margin-left:auto}
+.nav-item{position:relative}
+.nav-link{
+  display:flex;align-items:center;gap:.25rem;
+  padding:.45rem .7rem;font-size:.85rem;font-weight:500;
+  color:var(--text);white-space:nowrap;cursor:pointer;border:none;background:none;
+}
+.nav-link:hover{color:var(--accent)}
+.nav-link .arrow{font-size:.6rem;transition:transform .2s}
+.nav-item:hover .nav-link .arrow,
+.nav-item:focus-within .nav-link .arrow{transform:rotate(180deg)}
+
+/* Header CTA */
+.header-cta{margin-left:.75rem;flex-shrink:0}
+
+/* — Dropdown (regular) — */
+.dropdown{
+  display:none;position:absolute;top:100%;left:0;
+  min-width:240px;background:var(--bg);
+  border:1px solid var(--border);border-radius:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,.1);
+  padding:.5rem 0;z-index:60;
+}
+.dropdown a{
+  display:block;padding:.55rem 1.25rem;font-size:.85rem;
+  color:var(--text-secondary);
+}
+.dropdown a:hover{background:var(--bg-warm);color:var(--text)}
+.nav-item:hover>.dropdown,
+.nav-item:focus-within>.dropdown{display:block}
+
+/* — Mega Dropdown — */
+.nav-item--mega{position:static}
+.dropdown-mega{
+  display:none;position:absolute;top:100%;left:0;right:0;
+  width:100%;background:var(--bg);
+  border:1px solid var(--border);border-top:none;
+  box-shadow:0 8px 32px rgba(0,0,0,.1);
+  padding:1.5rem 2rem;z-index:60;
+}
+.nav-item--mega:hover>.dropdown-mega,
+.nav-item--mega:focus-within>.dropdown-mega{display:block}
+.mega-top-link{
+  display:inline-block;color:var(--link-blue);font-weight:600;
+  font-size:.9rem;margin-bottom:1rem;
+}
+.mega-top-link:hover{text-decoration:underline}
+.mega-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+}
+.mega-col-title{font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:.65rem}
+.mega-col a{
+  display:block;font-size:.82rem;color:var(--text-secondary);
+  padding:.25rem 0;
+}
+.mega-col a:hover{color:var(--link-blue);text-decoration:underline}
+
+/* 6. ANNOUNCEMENT BANNER — Black bar below header with event promo text
+   ============================================================= */
+.announce{
+  background:#000;color:#fff;
+  padding:1rem 0;overflow:hidden;
+}
+.announce-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+}
+.announce-text{font-size:.95rem;font-weight:600;line-height:1.4}
+.announce-text .btn{margin-top:.5rem}
+.announce-build{
+  font-size:2.2rem;font-weight:800;letter-spacing:.04em;
+  background:linear-gradient(135deg,#f25022,#7fba00,#00a4ef,#ffb900);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;flex-shrink:0;
+}
+
+/* 7. HERO — Big banner with background image, title, search bar
+   ============================================================= */
+.hero{
+  position:relative;min-height:480px; /* change min-height to make hero taller/shorter */
+  display:flex;align-items:flex-end;
+  padding:4rem 0 3rem;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('../img/heroes/hero-bg.avif') center/cover no-repeat; /* HERO IMAGE — change this URL */
+  z-index:0;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(transparent 20%,rgba(0,0,0,.75)); /* dark gradient over hero image */
+  z-index:1;
+}
+.hero .container{position:relative;z-index:2;text-align:center}
+.hero .section-label{color:var(--accent)}
+.hero-title{
+  font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  color:#fff;line-height:1.15;margin-bottom:1.25rem;
+}
+/* Play button */
+.play-btn{
+  position:absolute;top:1.5rem;left:1.5rem;z-index:3;
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(0,0,0,.55);display:grid;place-items:center;
+  cursor:pointer;border:none;transition:background .2s;
+}
+.play-btn:hover{background:rgba(0,0,0,.75)}
+.play-tri{
+  width:0;height:0;border:8px solid transparent;
+  border-left:14px solid #fff;margin-left:4px;
+}
+/* Hero search */
+.hero-search{
+  display:flex;align-items:center;gap:.5rem;
+  background:#fff;border-radius:999px;
+  max-width:600px;margin:0 auto 1.25rem;
+  padding:.35rem .4rem .35rem 1rem;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+}
+.hero-search input{
+  flex:1;border:none;outline:none;font-size:.9rem;
+  background:transparent;color:var(--text);
+}
+.hero-search .btn{
+  background:var(--accent);color:#fff;border-color:var(--accent);
+  border-radius:999px;padding:.5rem 1.1rem;font-size:.85rem;
+}
+.hero-search .btn:hover{background:#5a2590}
+.hero-explore{
+  color:#fff;font-size:.9rem;display:inline-flex;align-items:center;gap:.4rem;
+}
+.hero-explore:hover{text-decoration:underline}
+.explore-circle{
+  display:inline-grid;place-items:center;
+  width:24px;height:24px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.7);font-size:.7rem;
+}
+
+/* 8. SUB-NAVIGATION — Sticky secondary nav below hero (Event finder, Featured, etc.)
+   ============================================================= */
+.subnav{
+  position:sticky;top:var(--header-h);z-index:40;
+  background:var(--bg);border-bottom:1px solid var(--border);
+}
+.subnav-inner{
+  display:flex;align-items:center;gap:.15rem;
+  height:48px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.subnav-inner::-webkit-scrollbar{display:none}
+.subnav-link{
+  padding:.6rem .75rem;font-size:.82rem;font-weight:500;
+  white-space:nowrap;color:var(--text-secondary);
+  border-bottom:3px solid transparent;transition:.15s;flex-shrink:0;
+}
+.subnav-link:hover{color:var(--text)}
+.subnav-cta{margin-left:auto;flex-shrink:0}
+
+/* Active sub-nav — when you click a link, it underlines and scrolls to section */
+body:has(#event-finder:target) .subnav-link[href="#event-finder"],
+body:has(#featured-events:target) .subnav-link[href="#featured-events"],
+body:has(#events-by-category:target) .subnav-link[href="#events-by-category"],
+body:has(#upcoming-events:target) .subnav-link[href="#upcoming-events"],
+body:has(#industry-events:target) .subnav-link[href="#industry-events"],
+body:has(#additional-learning:target) .subnav-link[href="#additional-learning"],
+body:has(#next-steps:target) .subnav-link[href="#next-steps"]{
+  border-bottom-color:var(--text);
+}
+
+/* Scroll-spy — underline also appears when you scroll to a section */
+@supports (animation-timeline: view()) {
+  body{
+    timeline-scope:
+      --spy-finder, --spy-featured, --spy-category,
+      --spy-upcoming, --spy-industry, --spy-learning, --spy-next;
+  }
+  #event-finder       { view-timeline: --spy-finder   block; view-timeline-inset: -1px 85vh }
+  #featured-events    { view-timeline: --spy-featured  block; view-timeline-inset: -1px 85vh }
+  #events-by-category { view-timeline: --spy-category  block; view-timeline-inset: -1px 85vh }
+  #upcoming-events    { view-timeline: --spy-upcoming  block; view-timeline-inset: -1px 85vh }
+  #industry-events    { view-timeline: --spy-industry  block; view-timeline-inset: -1px 85vh }
+  #additional-learning{ view-timeline: --spy-learning  block; view-timeline-inset: -1px 85vh }
+  #next-steps         { view-timeline: --spy-next      block; view-timeline-inset: -1px 85vh }
+
+  @keyframes spy-active {
+    0%,100% { border-bottom-color: transparent }
+    25%,75% { border-bottom-color: var(--text) }
+  }
+  .subnav-link { animation: spy-active linear both }
+  .subnav-link[href="#event-finder"]       { animation-timeline: --spy-finder }
+  .subnav-link[href="#featured-events"]    { animation-timeline: --spy-featured }
+  .subnav-link[href="#events-by-category"] { animation-timeline: --spy-category }
+  .subnav-link[href="#upcoming-events"]    { animation-timeline: --spy-upcoming }
+  .subnav-link[href="#industry-events"]    { animation-timeline: --spy-industry }
+  .subnav-link[href="#additional-learning"]{ animation-timeline: --spy-learning }
+  .subnav-link[href="#next-steps"]         { animation-timeline: --spy-next }
+}
+
+/* Scroll offset so sections land below sticky header + subnav */
+#event-finder,#featured-events,#events-by-category,
+#upcoming-events,#industry-events,#additional-learning,
+#next-steps{scroll-margin-top:calc(var(--header-h) + 52px)}
+
+/* 9. SECTIONS — Generic section padding & background variants
+   .section-warm = beige bg | .section-cool = purple bg | .section-white = white bg
+   ============================================================= */
+.section{padding:4rem 0}
+.section-warm{background:var(--bg-warm)}
+.section-cool{background:var(--bg-cool)}
+.section-white{background:var(--bg)}
+
+/* 10. EVENT FINDER — Topic filter chips section (radio buttons styled as pills)
+   ============================================================= */
+.event-finder{position:relative;overflow:hidden}
+.event-finder::before{
+  content:'';position:absolute;left:0;top:0;
+  width:300px;height:100%;pointer-events:none;
+  background:radial-gradient(ellipse at 0% 50%,
+    rgba(233,180,210,.35),
+    rgba(180,190,240,.25) 40%,
+    transparent 70%);
+}
+/* Filter chips */
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-bottom:1.5rem}
+.chip-input{position:absolute;opacity:0;pointer-events:none}
+.chip{
+  display:inline-block;
+  padding:.55rem 1.2rem;font-size:.85rem;font-weight:600;
+  border-radius:999px;cursor:pointer;
+  background:#e8e8e8;color:var(--text);
+  border:1px solid transparent;transition:.15s;
+}
+.chip:hover{background:#ddd}
+.chip-input:checked+.chip{
+  background:var(--btn-primary-bg);color:#fff;border-color:var(--btn-primary-bg);
+}
+
+/* 11. FEATURED EVENTS — Large hero card + 3-column event cards grid
+   ============================================================= */
+/* Featured hero card (2-column: text left, image right) */
+.feat-hero{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  background:var(--bg);border-radius:20px;
+  border:1px solid var(--border);overflow:hidden;
+  margin-bottom:2rem;
+}
+.feat-hero-copy{padding:2.5rem 2rem;display:flex;flex-direction:column;justify-content:center}
+.feat-hero-copy .section-label{margin-bottom:.5rem}
+.feat-hero-copy h3{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.75rem}
+.feat-hero-copy p{margin-bottom:1.25rem}
+.feat-hero-img{position:relative;min-height:300px}
+.feat-hero-img img{
+  width:100%;height:100%;object-fit:cover;
+  border:4px solid rgba(255,255,255,.6);
+  box-shadow:0 0 0 1px var(--border);
+}
+
+/* Event cards grid — 3 columns, also reused for learning cards */
+.events-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;
+}
+.ev-card{
+  background:var(--bg);border:1px solid var(--border);border-radius:16px;
+  overflow:hidden;transition:box-shadow .2s,transform .2s;
+}
+.ev-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-2px)}
+.ev-card-img{
+  position:relative;height:200px;overflow:hidden;
+}
+.ev-card-img img{
+  width:100%;height:100%;object-fit:cover;
+  border:4px solid rgba(255,255,255,.6);
+  box-shadow:0 0 0 1px var(--border);
+}
+.ev-card-body{padding:1.25rem}
+.ev-card-body .section-label{margin-bottom:.4rem}
+.ev-card-title{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:.5rem;line-height:1.3}
+.ev-card-desc{
+  font-size:.85rem;color:var(--text-secondary);line-height:1.55;
+  margin-bottom:1rem;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+
+/* 12. EVENTS BY CATEGORY — Horizontal scrolling carousel with category cards
+   ============================================================= */
+/* Tab switching: radio inputs as siblings of panels */
+.cat-tabs-wrap{position:relative}
+.cat-tabs-wrap>.chip-input{position:absolute;opacity:0;pointer-events:none}
+/* Show/hide panels based on checked radio */
+.cat-panel{display:none}
+#cat-aud:checked~.cat-panel--aud,
+#cat-topic:checked~.cat-panel--topic,
+#cat-prod:checked~.cat-panel--prod{display:block}
+/* Highlight active chip label */
+#cat-aud:checked~.chips label[for="cat-aud"],
+#cat-topic:checked~.chips label[for="cat-topic"],
+#cat-prod:checked~.chips label[for="cat-prod"]{
+  background:var(--btn-primary-bg);color:#fff;border-color:var(--btn-primary-bg);
+}
+
+.carousel-wrap{position:relative}
+.carousel{
+  display:flex;gap:1.25rem;
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;-webkit-overflow-scrolling:touch;
+  padding-bottom:1rem;
+}
+.carousel::-webkit-scrollbar{height:6px}
+.carousel::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+.carousel>*{scroll-snap-align:start;flex-shrink:0}
+.cat-card{
+  width:calc(33.333% - 1rem);min-width:260px;
+  background:var(--bg);border-radius:18px;
+  border:1px solid var(--border);overflow:hidden;
+  transition:box-shadow .2s;
+}
+.cat-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.cat-card-img{height:200px;overflow:hidden}
+.cat-card-img img{
+  width:100%;height:100%;object-fit:cover;
+  border:4px solid rgba(255,255,255,.6);
+  box-shadow:0 0 0 1px var(--border);
+}
+.cat-card-body{padding:1.25rem}
+.cat-card-body h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.75rem}
+.cat-link{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.85rem;font-weight:600;color:var(--accent);
+}
+.cat-link:hover{text-decoration:underline}
+.arrow-circle{
+  display:inline-grid;place-items:center;
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  font-size:.85rem;transition:.15s;
+}
+.arrow-circle--outline{border:2px solid var(--accent);color:var(--accent)}
+/* Carousel nav arrows */
+.carousel-arrows{display:flex;gap:.75rem;margin-top:1rem}
+.c-arrow{
+  width:48px;height:48px;border-radius:50%;
+  display:grid;place-items:center;font-size:1.1rem;
+  cursor:pointer;border:2px solid;transition:.15s;background:transparent;
+}
+.c-arrow--disabled{border-color:var(--border);color:var(--border);cursor:default}
+.c-arrow--active{border-color:var(--accent);color:var(--accent)}
+.c-arrow--active:hover{background:var(--bg-cool)}
+
+/* 13. UPCOMING EVENTS — Event cards with badges (In person / Digital)
+   ============================================================= */
+.up-card{
+  position:relative;width:calc(33.333% - 1rem);min-width:280px;
+  background:var(--bg);border-radius:18px;
+  border:1px solid var(--border);padding:1.5rem;overflow:hidden;
+  transition:box-shadow .2s;
+}
+.up-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+/* gradient blob */
+.up-card::before{
+  content:'';position:absolute;top:-30px;right:-30px;
+  width:140px;height:140px;border-radius:50%;
+  pointer-events:none;opacity:.45;
+}
+.up-card--person::before{background:radial-gradient(circle,#f5d0a0,transparent 70%)}
+.up-card--digital::before{background:radial-gradient(circle,#d4c0f0,transparent 70%)}
+/* Badge */
+.badge{
+  display:inline-block;padding:.22rem .7rem;font-size:.72rem;
+  font-weight:600;border-radius:999px;margin-bottom:.75rem;
+}
+.badge-person{background:var(--badge-person-bg);color:var(--badge-person-text)}
+.badge-digital{background:var(--badge-digital-bg);color:var(--badge-digital-text)}
+
+.up-card-title{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:.5rem;line-height:1.3}
+.up-card-desc{
+  font-size:.85rem;color:var(--text-secondary);line-height:1.5;
+  margin-bottom:.75rem;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.up-card-location{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+.up-card-date{font-size:.8rem;color:var(--text-secondary);margin-bottom:1rem;line-height:1.6}
+
+/* 14. INDUSTRY EVENTS — 2-column hero card (text left, image right)
+   ============================================================= */
+.industry-hero{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  background:var(--bg);border-radius:24px;
+  border:1px solid var(--border);overflow:hidden;
+}
+.industry-copy{padding:2.5rem 2rem;display:flex;flex-direction:column;justify-content:center}
+.industry-copy h3{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.75rem}
+.industry-copy p{margin-bottom:1.25rem}
+.industry-img img{
+  width:100%;height:100%;object-fit:cover;
+  border:4px solid rgba(255,255,255,.6);
+  box-shadow:0 0 0 1px var(--border);
+}
+
+/* 15. BECOME A SPONSOR — Centered CTA section with decorative gradient blob
+   ============================================================= */
+.sponsor{position:relative;overflow:hidden}
+.sponsor::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:600px;height:200px;pointer-events:none;
+  background:radial-gradient(ellipse,rgba(233,180,220,.25),transparent 70%);
+}
+.sponsor h2{font-size:clamp(1.8rem,3.5vw,2.5rem)}
+
+/* 16. ADDITIONAL LEARNING — 3-column cards with images (course cards)
+   ============================================================= */
+.learn-card{
+  background:var(--bg);border-radius:18px;border:1px solid var(--border);
+  overflow:hidden;transition:box-shadow .2s;
+}
+.learn-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.learn-card-img{height:200px;overflow:hidden}
+.learn-card-img img{
+  width:100%;height:100%;object-fit:cover;
+  border:4px solid rgba(255,255,255,.6);
+  box-shadow:0 0 0 1px var(--border);
+}
+.learn-card-body{padding:1.25rem}
+.learn-card-body h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.learn-card-body p{font-size:.85rem;line-height:1.5;margin-bottom:1rem}
+
+/* 17. NEXT STEPS — CTA banner + 2-column info cards (accessibility, code of conduct)
+   ============================================================= */
+.cta-banner{
+  background:linear-gradient(135deg,#fce4ec,#e8eaf6,#e0f7fa);
+  border-radius:20px;padding:3rem;text-align:center;
+  margin-bottom:2rem;
+}
+.cta-banner h3{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.cta-banner p{color:var(--text-secondary);margin-bottom:1.25rem;max-width:60ch;margin-inline:auto}
+
+.info-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.info-card{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  background:var(--bg);border-radius:18px;border:1px solid var(--border);
+  overflow:hidden;
+}
+.info-card-copy{padding:1.5rem;display:flex;flex-direction:column;justify-content:center}
+.info-card-copy h3{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.info-card-copy p{font-size:.85rem;line-height:1.5;margin-bottom:1rem}
+.info-card-img img{
+  width:100%;height:100%;object-fit:cover;
+  border:4px solid rgba(255,255,255,.6);
+  box-shadow:0 0 0 1px var(--border);
+}
+
+/* 18. SOCIAL BAR — Follow us bar with social media icons (Facebook, X, LinkedIn)
+   ============================================================= */
+.social-bar{
+  padding:1.25rem 0;border-bottom:1px solid var(--border);
+}
+.social-inner{display:flex;align-items:center;gap:1rem}
+.social-label{font-size:.9rem;font-weight:600;color:var(--link-blue)}
+.social-icons{display:flex;gap:.75rem}
+.social-icon{
+  display:grid;place-items:center;width:32px;height:32px;
+  font-size:1.1rem;color:var(--text);transition:.15s;
+}
+.social-icon:hover{color:var(--accent)}
+
+/* 19. FOOTER — 6-column footer grid with link columns
+   ============================================================= */
+.footer{background:var(--bg-footer);padding:2.5rem 0 1rem}
+.footer-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:1.5rem;
+  margin-bottom:2rem;
+}
+.footer-col h4{
+  font-size:.78rem;font-weight:700;color:var(--text);
+  margin-bottom:.65rem;
+}
+.footer-col a{
+  display:block;font-size:.78rem;color:var(--text-secondary);
+  padding:.2rem 0;
+}
+.footer-col a:hover{text-decoration:underline;color:var(--text)}
+
+/* 20. FOOTER BOTTOM — Copyright bar, privacy links, language selector
+   ============================================================= */
+.footer-bottom{
+  border-top:1px solid #d0d0d0;padding-top:1rem;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:.75rem;
+}
+.footer-bottom-left,
+.footer-bottom-right{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.footer-bottom a,.footer-bottom span,.footer-bottom p{
+  font-size:.72rem;color:var(--text-secondary);
+}
+.footer-bottom a:hover{text-decoration:underline}
+.fb-sep{opacity:.35}
+
+/* 21. FIXED FEEDBACK — Floating button bottom-left corner
+   ============================================================= */
+.feedback-btn{
+  position:fixed;bottom:1.5rem;left:1.5rem;z-index:50;
+  background:var(--btn-primary-bg);color:#fff;
+  padding:.45rem 1rem;font-size:.8rem;font-weight:600;
+  border-radius:999px;border:none;cursor:pointer;
+  box-shadow:0 2px 12px rgba(0,0,0,.2);transition:.15s;
+}
+.feedback-btn:hover{background:#2d2650}
+
+/* ======================================================================
+   SEARCH PAGE (search.html) — Hero with search box & decorative blob
+   ====================================================================== */
+.search-section{
+  position:relative;overflow:hidden;
+  padding:4rem 0;background:var(--bg-warm);
+}
+.search-section::after{
+  content:'';position:absolute;right:0;top:0;
+  width:300px;height:100%;pointer-events:none;
+  background:radial-gradient(ellipse at 100% 50%,
+    rgba(233,180,210,.3),
+    rgba(180,190,240,.2) 40%,
+    transparent 70%);
+}
+.search-wrapper{position:relative;z-index:1;display:flex;align-items:center;gap:2rem}
+.search-content{max-width:580px}
+.search-title{
+  font-size:clamp(2rem,4.5vw,3.5rem);font-weight:700;
+  color:var(--text);line-height:1.1;margin-bottom:1rem;
+}
+.search-desc{margin-bottom:1.5rem}
+.search-box{
+  display:flex;align-items:center;gap:.5rem;
+  background:#fff;border-radius:999px;
+  padding:.35rem .4rem .35rem 1rem;
+  border:1px solid var(--border);
+}
+.search-box input{
+  flex:1;border:none;outline:none;font-size:.9rem;
+  background:transparent;color:var(--text);
+}
+.search-decoration{
+  flex:1;min-height:280px;
+  background:radial-gradient(circle at 60% 40%,
+    rgba(233,180,210,.4),
+    rgba(180,190,240,.3) 45%,
+    transparent 70%);
+  border-radius:50%;
+}
+
+/* ======================================================================
+   CATALOG PAGE (search-catalog.html) — Sidebar filters + event grid + pagination
+   ====================================================================== */
+/* Filter status bar — shows active filter chips at top */
+.filter-bar{
+  display:flex;align-items:center;flex-wrap:wrap;gap:.75rem;
+  padding:1rem 0;border-bottom:1px solid var(--border);
+}
+.filter-bar-inner{
+  display:flex;align-items:center;flex-wrap:wrap;gap:.75rem;
+}
+.filter-count{font-size:.9rem;font-weight:600;color:var(--text)}
+.filter-active-chips{display:flex;gap:.5rem;flex-wrap:wrap}
+.filter-chip{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.25rem .7rem;font-size:.78rem;font-weight:600;
+  background:var(--accent);color:#fff;border-radius:999px;
+}
+.chip-x{cursor:pointer;font-size:.7rem;opacity:.8}
+.chip-x:hover{opacity:1}
+.filter-actions{margin-left:auto;display:flex;gap:1rem;align-items:center}
+.filter-clear,.filter-share{font-size:.82rem;color:var(--link-blue)}
+.filter-clear:hover,.filter-share:hover{text-decoration:underline}
+
+/* Catalog layout — sidebar (280px) + main grid */
+.catalog-layout{
+  display:grid;grid-template-columns:280px 1fr;gap:1.5rem;
+  padding:1.5rem 0 3rem;
+}
+/* Sidebar — sticky filter panel with collapsible sections */
+.sidebar{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:18px;overflow:hidden;height:fit-content;
+  position:sticky;top:calc(var(--header-h) + 16px);
+}
+.sidebar-title{
+  font-size:1rem;font-weight:700;color:var(--text);
+  padding:1.25rem 1.25rem .5rem;
+}
+.filter-row{border-bottom:1px solid #e8e8e8}
+.filter-row:last-child{border-bottom:none}
+.filter-row summary{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.25rem;font-size:.9rem;font-weight:600;
+  color:var(--text);cursor:pointer;list-style:none;
+}
+.filter-row summary::-webkit-details-marker{display:none}
+.filter-row summary::marker{display:none}
+.plus-icon{
+  display:grid;place-items:center;
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:var(--accent);color:#fff;font-size:.9rem;font-weight:700;
+  transition:transform .2s;
+}
+.filter-row[open] .plus-icon{transform:rotate(45deg)}
+.filter-content{padding:0 1.25rem 1rem}
+.filter-content label{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.82rem;color:var(--text-secondary);padding:.3rem 0;cursor:pointer;
+}
+.filter-content input[type="checkbox"]{accent-color:var(--accent)}
+
+/* Catalog grid — 3-column event cards */
+.catalog-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;
+}
+
+/* Pagination */
+.pagination{
+  display:flex;justify-content:center;align-items:center;gap:.35rem;
+  padding:2rem 0 .5rem;
+}
+.page-btn{
+  display:inline-grid;place-items:center;
+  min-width:36px;height:36px;padding:0 .5rem;
+  font-size:.85rem;border-radius:8px;
+  background:transparent;color:var(--text-secondary);
+  border:none;cursor:pointer;transition:.15s;
+}
+.page-btn:hover{background:var(--bg-footer)}
+.page-btn--active{
+  background:var(--btn-primary-bg);color:#fff;font-weight:600;
+}
+.page-btn--ellipsis{cursor:default}
+.page-btn--ellipsis:hover{background:transparent}
+.page-btn--arrow{font-size:1rem;font-weight:700}
+.pagination-note{
+  font-size:.8rem;color:var(--text-secondary);padding:.5rem 0 0;
+}
+
+/* Catalog main area */
+.catalog-main{min-width:0}
+.catalog-count{font-size:.9rem;color:var(--text-secondary);margin-bottom:1rem}
+.catalog-count strong{color:var(--text)}
+.filter-option{user-select:none}
+
+/* ======================================================================
+   EVENT DETAIL PAGE (event-detail.html) — Hero banner, content + sidebar layout
+   ====================================================================== */
+.detail-hero{ /* hero banner with background image */
+  position:relative;min-height:420px;
+  display:flex;align-items:flex-end;padding:3rem 0;overflow:hidden;
+}
+.detail-hero-bg{
+  position:absolute;inset:0;
+  background:url('C:\Users\PC\Desktop\project web\img1.avif') center/cover no-repeat; /* EVENT DETAIL HERO IMAGE — change this URL */
+  z-index:0;
+}
+.detail-hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(transparent 10%,rgba(0,0,0,.8));
+  z-index:1;
+}
+.detail-hero-content{position:relative;z-index:2}
+.detail-hero-title{
+  font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;
+  color:#fff;line-height:1.15;margin-bottom:.75rem;
+}
+.detail-hero-meta{display:flex;gap:.5rem;margin-bottom:.5rem}
+.detail-hero-info{color:rgba(255,255,255,.85);font-size:.95rem;margin-bottom:.5rem}
+.detail-hero-desc{color:rgba(255,255,255,.75);max-width:60ch;line-height:1.5}
+
+/* Detail layout — main content + 340px sidebar */
+.detail-layout{
+  display:grid;grid-template-columns:1fr 340px;gap:2.5rem;
+}
+.detail-main h2{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:1rem}
+.detail-main h3{font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:.75rem}
+.detail-main p{margin-bottom:1rem;line-height:1.65}
+.detail-main ul{margin-bottom:1.5rem;padding-left:1.25rem;list-style:disc}
+.detail-main li{margin-bottom:.35rem;font-size:.9rem;line-height:1.5}
+
+/* Detail sidebar — sticky event info block (date, location, etc.) */
+.detail-sidebar{position:sticky;top:calc(var(--header-h) + 16px);height:fit-content}
+.detail-info-block{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:18px;padding:1.5rem;
+}
+.detail-info-block h4{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:1rem}
+.detail-dl{display:grid;grid-template-columns:auto 1fr;gap:.35rem .75rem}
+.detail-dl dt{font-size:.82rem;font-weight:600;color:var(--text)}
+.detail-dl dd{font-size:.82rem;color:var(--text-secondary);margin:0}
+
+/* ======================================================================
+   RESPONSIVE — Breakpoints: 1199px (tablet), 900px (nav collapse),
+   767px (mobile), 480px (small mobile)
+   ====================================================================== */
+
+/* Tablet (below 1200px) — grids go to 2 columns */
+@media(max-width:1199px){
+  .events-grid{grid-template-columns:repeat(2,1fr)}
+  .catalog-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:repeat(3,1fr)}
+  .info-cards{grid-template-columns:1fr}
+  .mega-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Tablet nav (below 900px) */
+@media(max-width:900px){
+  .hamburger{display:flex}
+  .nav{
+    display:none;flex-direction:column;
+    position:absolute;top:100%;left:0;right:0;
+    background:var(--bg);border-bottom:1px solid var(--border);
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    padding:.75rem 0;z-index:55;
+  }
+  .ham-input:checked~.nav{display:flex}
+  .nav-item{width:100%}
+  .nav-link{padding:.65rem 1.25rem;width:100%;justify-content:space-between}
+  .dropdown,.dropdown-mega{
+    position:static;box-shadow:none;border:none;
+    border-radius:0;padding-left:1.5rem;
+  }
+  .dropdown a{padding:.45rem 1.25rem}
+  .mega-grid{grid-template-columns:1fr}
+  .header-cta{display:none}
+  .ham-input:checked~.header-cta{display:block;width:100%;padding:.5rem 1.25rem}
+  .feat-hero{grid-template-columns:1fr}
+  .feat-hero-img{min-height:220px}
+  .industry-hero{grid-template-columns:1fr}
+  .info-card{grid-template-columns:1fr}
+  .catalog-layout{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .detail-layout{grid-template-columns:1fr}
+  .detail-sidebar{position:static}
+  .search-wrapper{flex-direction:column}
+  .search-decoration{min-height:180px;width:100%}
+}
+
+/* Mobile (below 768px) */
+@media(max-width:767px){
+  .events-grid{grid-template-columns:1fr}
+  .catalog-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .announce-build{display:none}
+  .announce-inner{justify-content:center;text-align:center}
+  .hero{min-height:380px;padding:3rem 0 2rem}
+  .cat-card{width:calc(80vw - 1rem);min-width:240px}
+  .up-card{width:calc(80vw - 1rem);min-width:260px}
+  .filter-bar{flex-direction:column;align-items:flex-start}
+  .filter-bar-right{margin-left:0;width:100%;justify-content:space-between}
+}
+
+/* Small mobile */
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr}
+  .hero-search{max-width:100%}
+}
+
+/* ============================================================
+   CATEGORY FILTERING (CSS-only :target)
+   ============================================================ */
+.filter-target{height:0;overflow:hidden;margin:0;padding:0}
+.filter-target:target{height:auto;overflow:visible;margin-bottom:1rem}
+.filter-banner{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
+  background:var(--bg-cool);padding:.75rem 1.25rem;border-radius:10px;font-size:.9rem
+}
+.filter-banner strong{color:var(--accent)}
+.filter-banner a{color:var(--link-blue);text-decoration:none;font-weight:600}
+.filter-banner a:hover{text-decoration:underline}
+
+/* Hide event count & pagination when a filter is active */
+.filter-target:target ~ .catalog-count{display:none}
+.filter-target:target ~ .pagination{display:none}
+
+/* Hide non-matching cards per category */
+#filter-developer:target ~ .catalog-grid .up-card:not(.cat-developer),
+#filter-startup:target ~ .catalog-grid .up-card:not(.cat-startup),
+#filter-enterprise:target ~ .catalog-grid .up-card:not(.cat-enterprise),
+#filter-ai-research:target ~ .catalog-grid .up-card:not(.cat-ai-research),
+#filter-it-pro:target ~ .catalog-grid .up-card:not(.cat-it-pro),
+#filter-students:target ~ .catalog-grid .up-card:not(.cat-students),
+#filter-ai-ml:target ~ .catalog-grid .up-card:not(.cat-ai-ml),
+#filter-cybersec:target ~ .catalog-grid .up-card:not(.cat-cybersec),
+#filter-cloud:target ~ .catalog-grid .up-card:not(.cat-cloud),
+#filter-data:target ~ .catalog-grid .up-card:not(.cat-data),
+#filter-quantum:target ~ .catalog-grid .up-card:not(.cat-quantum),
+#filter-robotics:target ~ .catalog-grid .up-card:not(.cat-robotics),
+#filter-ms-azure:target ~ .catalog-grid .up-card:not(.cat-ms-azure),
+#filter-google:target ~ .catalog-grid .up-card:not(.cat-google),
+#filter-nvidia:target ~ .catalog-grid .up-card:not(.cat-nvidia),
+#filter-openai:target ~ .catalog-grid .up-card:not(.cat-openai),
+#filter-apple:target ~ .catalog-grid .up-card:not(.cat-apple),
+#filter-aws:target ~ .catalog-grid .up-card:not(.cat-aws){display:none}

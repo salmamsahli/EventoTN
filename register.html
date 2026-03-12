@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event Registration — EventoTN</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="brand-ms">EventoTN</span></a>
+      <nav class="nav">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="search-catalog.html">Browse catalog</a>
+        <a class="nav-link" href="search.html">Search</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section-warm">
+      <div class="container">
+        <h2 class="section-title mx-auto">Register for an Event</h2>
+        <form class="registration-form" enctype="multipart/form-data" style="max-width:480px;margin:auto">
+          <label>Name:<br><input type="text" name="name" required /></label><br>
+          <label>Email:<br><input type="email" name="email" required /></label><br>
+          <label>Phone Number:<br><input type="tel" name="phone" pattern="\+?[0-9\-\s]{7,15}" placeholder="+216 99 999 999" required /></label><br>
+          <label>Upload CV/Resume:<br><input type="file" name="cv" accept=".pdf,.doc,.docx" /></label><br>
+          <label>Event:<br>
+            <select name="event">
+              <option>World AI & Robotics Congress — Tunis</option>
+              <option>Global Tech Innovation Summit: AI Fundamentals</option>
+              <option>World AI & Robotics Congress — Sousse</option>
+              <option>International Cloud & Infrastructure Forum</option>
+              <option>World AI & Robotics Congress — Hammamet</option>
+              <option>NextGen Innovation Expo 2026</option>
+              <option>Tech Titans Leadership Summit 2026</option>
+              <option>The Autonomous Future Forum 2026</option>
+            </select>
+          </label><br>
+          <label>Preferred Format:<br>
+            <select name="format">
+              <option>In person</option>
+              <option>Online</option>
+            </select>
+          </label><br>
+          <label>Key Topics:<br>
+            <input type="checkbox" name="topics" value="AI" /> AI
+            <input type="checkbox" name="topics" value="Cloud" /> Cloud
+            <input type="checkbox" name="topics" value="Security" /> Security
+            <input type="checkbox" name="topics" value="Data" /> Data
+            <input type="checkbox" name="topics" value="Robotics" /> Robotics
+            <input type="checkbox" name="topics" value="Quantum" /> Quantum
+          </label><br>
+          <label>Additional Comments:<br><textarea name="comments" rows="3"></textarea></label><br>
+          <button class="btn btn-primary" type="submit">Submit Registration</button>
+        </form>
+
+        <div class="related-events" style="margin-top:2rem">
+          <h3>Related Events</h3>
+          <ul>
+            <li><a href="event-detail.html">NextGen Innovation Expo 2026</a></li>
+            <li><a href="search-catalog.html#filter-ai-ml">AI & Machine Learning Events</a></li>
+            <li><a href="search-catalog.html#filter-cloud">Cloud Computing Events</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; EventoTN 2026</p>
+    </div>
+  </footer>
+</body>
+</html>
