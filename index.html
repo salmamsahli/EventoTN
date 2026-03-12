@@ -7,6 +7,31 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+  <!-- Pop-up overlays -->
+  <input type="checkbox" id="popup-join" class="sr-only" />
+  <div class="popup-overlay" id="popup-join-overlay">
+    <div class="popup-content">
+      <h2 class="section-title">Coming soon</h2>
+      <p class="section-desc">Soon we will add details about upcoming events.</p>
+      <label for="popup-join" class="btn btn-primary mt-2">Close</label>
+    </div>
+  </div>
+  <input type="checkbox" id="popup-sponsor" class="sr-only" />
+  <div class="popup-overlay" id="popup-sponsor-overlay">
+    <div class="popup-content">
+      <h2 class="section-title">Become a Sponsor</h2>
+      <p class="section-desc">Sponsorship details will be added soon.</p>
+      <label for="popup-sponsor" class="btn btn-primary mt-2">Close</label>
+    </div>
+  </div>
+  <input type="checkbox" id="popup-social" class="sr-only" />
+  <div class="popup-overlay" id="popup-social-overlay">
+    <div class="popup-content">
+      <h2 class="section-title">Social Media</h2>
+      <p class="section-desc">Social media links will be added soon.</p>
+      <label for="popup-social" class="btn btn-primary mt-2">Close</label>
+    </div>
+  </div>
 
   <!-- SECTION 1 — HEADER (sticky top bar)
        Contains: logo, hamburger menu, nav dropdowns, CTA button
@@ -116,7 +141,7 @@
     <div class="container announce-inner">
       <div class="announce-text">
         Go deep on real code and real systems at NextGen Innovation Expo 2026, June 2–3
-        <br /><a class="btn btn-white btn-sm" href="#" style="margin-top:.5rem">Learn more</a>
+        <br /><label for="popup-sponsor" class="btn btn-white btn-sm mt-1 cursor-pointer">Learn more</label>
       </div>
       <div class="announce-build" aria-hidden="true">BUILD</div>
     </div>
@@ -133,11 +158,11 @@
     <div class="hero-bg"></div> <!-- background image (set in CSS) -->
     <div class="hero-overlay"></div> <!-- dark gradient over image -->
     <div class="container">
-      <p class="section-label" style="color:var(--border)">EventoTN</p>
+      <p class="section-label border-label">EventoTN</p>
       <h1 class="hero-title">Expand your network.<br>Grow your knowledge.</h1>
       <div class="hero-search">
         <input type="search" placeholder="Search by keyword, event, topic, or location." />
-        <button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent);border-radius:999px;padding:.5rem 1rem;font-size:.85rem">&#128269;</button>
+        <button class="btn search-btn">&#128269;</button>
       </div>
       <a class="hero-explore" href="search-catalog.html">
         <span class="explore-circle">&#9655;</span> Explore all events
@@ -169,7 +194,6 @@
       <p class="section-label">EVENT FINDER</p>
       <h2 class="section-title mx-auto">Discover events tailored to you</h2>
       <p class="section-desc mx-auto">To see events recommended just for you, first select a topic and then an audience.</p>
-
       <div class="chips">
         <input type="radio" name="topic" id="t-ai" class="chip-input" checked />
         <label for="t-ai" class="chip">AI &amp; Machine Learning</label>
@@ -184,6 +208,7 @@
         <input type="radio" name="topic" id="t-robot" class="chip-input" />
         <label for="t-robot" class="chip">Robotics &amp; Automation</label>
       </div>
+      <button class="btn btn-primary mt-2">Next</button>
     </div>
   </section>
 
@@ -193,7 +218,7 @@
        ============================================================ -->
   <section id="featured-events" class="section section-warm">
     <div class="container">
-      <div class="text-center" style="margin-bottom:2rem">
+      <div class="text-center mb-1">
         <p class="section-label">FEATURED EVENTS</p>
         <h2 class="section-title mx-auto">Stay ahead of the curve</h2>
         <p class="section-desc mx-auto">Learn how to work easier and faster with new ideas, solutions, and products from industry experts and partners.</p>
@@ -205,7 +230,10 @@
           <p class="section-label">Multiple</p>
           <h3>AI Frontier Summit</h3>
           <p>A free, one-day event coming to a city near you. Discover how AI is transforming industries and learn to build your own AI-powered solutions with cutting-edge tools and platforms.</p>
-          <div><a class="btn btn-primary" href="#">Find a tour stop</a></div>
+          <div>
+            <a class="btn btn-primary" href="ai-frontier-tour.html">Find a tour stop</a>
+            <label for="popup-join" class="btn btn-outline btn-sm ml-1 cursor-pointer">Join us at upcoming events</label>
+          </div>
         </div>
         <div class="feat-hero-img">
           <img src="assets/img/featured/1.jpg" alt="AI Frontier Summit" />
@@ -220,7 +248,7 @@
             <p class="section-label">June 2–3, 2026 | In person &amp; Online</p>
             <h3 class="ev-card-title">North Africa AI Builders Summit</h3>
             <p class="ev-card-desc">The premier event for developers. Explore the latest tools, technologies, and platform updates across cloud, AI, and beyond.</p>
-            <a class="btn btn-primary btn-sm" href="event-north-africa-ai-builders-summit.html">Registration and details</a>
+            <a class="btn btn-primary btn-sm" href="files/event-north-africa-ai-builders-summit.html">Registration and details</a>
           </div>
         </div>
         <div class="ev-card">
@@ -229,7 +257,7 @@
             <p class="section-label">November 3–6, 2026 | In person &amp; Online</p>
             <h3 class="ev-card-title">Azure Innovation & Cloud Forum Tunisia</h3>
             <p class="ev-card-desc">The largest conference for IT professionals. Deep dives into security, cloud infrastructure, and enterprise solutions.</p>
-            <a class="btn btn-primary btn-sm" href="event-azure-innovation-cloud-forum-tunisia.html">Registration and details</a>
+            <a class="btn btn-primary btn-sm" href="files/event-azure-innovation-cloud-forum-tunisia.html">Registration and details</a>
           </div>
         </div>
         <div class="ev-card">
@@ -238,7 +266,7 @@
             <p class="section-label">Online</p>
             <h3 class="ev-card-title">GPU Accelerated AI Conference</h3>
             <p class="ev-card-desc">Stay ahead of threats. Learn about Zero Trust, threat detection, SIEM, and identity management best practices from industry experts.</p>
-            <a class="btn btn-primary btn-sm" href="event-gpu-accelerated-ai-conference.html">Registration and details</a>
+            <a class="btn btn-primary btn-sm" href="files/event-gpu-accelerated-ai-conference.html">Registration and details</a>
           </div>
         </div>
       </div>
@@ -251,7 +279,7 @@
        ============================================================ -->
   <section id="events-by-category" class="section section-cool">
     <div class="container">
-      <div class="text-center" style="margin-bottom:2rem">
+      <div class="text-center mb-1">
         <p class="section-label">EVENTS BY CATEGORY</p>
         <h2 class="section-title mx-auto">Pursue your interests</h2>
       </div>
@@ -262,7 +290,7 @@
         <input type="radio" name="cat-tab" id="cat-topic" class="chip-input" />
         <input type="radio" name="cat-tab" id="cat-prod" class="chip-input" />
 
-        <div class="chips" style="margin-bottom:1.5rem">
+        <div class="chips mb-1">
           <label for="cat-aud" class="chip">Audience</label>
           <label for="cat-topic" class="chip">Topic</label>
           <label for="cat-prod" class="chip">Product</label>
@@ -424,7 +452,7 @@
        ============================================================ -->
   <section id="upcoming-events" class="section section-warm">
     <div class="container">
-      <div class="text-center" style="margin-bottom:2rem">
+      <div class="text-center mb-1">
         <p class="section-label">UPCOMING EVENTS</p>
         <h2 class="section-title mx-auto">Join an event at your next earliest opportunity</h2>
         <p class="section-desc mx-auto">Interact with peers and industry experts at upcoming online and in-person events.</p>
@@ -439,7 +467,7 @@
           <p class="up-card-desc">Explore AI innovations, hands-on labs, and networking opportunities with tech experts and technology partners.</p>
             <p class="up-card-location">Tunis, Tunisia</p>
             <p class="up-card-date">2026-03-18 · 10:00 – 17:00 CET</p>
-          <a class="btn btn-primary btn-sm" href="event-google-cloud-data-intelligence-expo.html">Registration and details</a>
+          <a class="btn btn-primary btn-sm" href="files/event-google-cloud-data-intelligence-expo.html">Registration and details</a>
           </div>
           <!-- Card 2 — Online -->
           <div class="up-card up-card--digital">
@@ -448,7 +476,7 @@
           <p class="up-card-desc">A free virtual event to learn the fundamentals of AI, including machine learning, computer vision, and natural language processing.</p>
             <p class="up-card-location">Online</p>
             <p class="up-card-date">2026-03-20 · 10:00 – 17:00 CET</p>
-          <a class="btn btn-primary btn-sm" href="event-cybertrust-tunisia-summit.html">Registration and details</a>
+          <a class="btn btn-primary btn-sm" href="files/event-cybertrust-tunisia-summit.html">Registration and details</a>
           </div>
           <!-- Card 3 — In person -->
           <div class="up-card up-card--person">
@@ -457,7 +485,7 @@
           <p class="up-card-desc">Connect with fellow entrepreneurs and AI enthusiasts at this exclusive forum.</p>
             <p class="up-card-location">Sousse, Tunisia</p>
             <p class="up-card-date">2026-04-02 · 09:30 – 18:00 CET</p>
-          <a class="btn btn-primary btn-sm" href="event-mediterranean-startup-ai-founders-forum.html">Registration and details</a>
+          <a class="btn btn-primary btn-sm" href="files/event-mediterranean-startup-ai-founders-forum.html">Registration and details</a>
           </div>
           <!-- Card 4 — In person -->
           <div class="up-card up-card--person">
@@ -466,11 +494,11 @@
             <p class="up-card-desc">Learn to use AI-powered productivity tools in your daily workflow to boost your personal efficiency.</p>
             <p class="up-card-location">Inperson</p>
             <p class="up-card-date">2026-04-10 · 11:00 – 13:00 CET<br>2026-04-11 · 11:00 – 13:00 CET</p>
-          <a class="btn btn-primary btn-sm" href="event-apple-silicon-developer-lab-tunisia.html">Registration and details</a>
+          <a class="btn btn-primary btn-sm" href="files/event-apple-silicon-developer-lab-tunisia.html">Registration and details</a>
           </div>
           
         </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:1rem">
+        <div class="carousel-controls">
           <div class="carousel-arrows">
             <span class="c-arrow c-arrow--disabled">&#8592;</span>
             <span class="c-arrow c-arrow--active">&#8594;</span>
@@ -486,7 +514,7 @@
        ============================================================ -->
   <section id="industry-events" class="section section-warm">
     <div class="container">
-      <div class="text-center" style="margin-bottom:2rem">
+      <div class="text-center mb-1">
         <p class="section-label">INDUSTRY EVENTS</p>
         <h2 class="section-title mx-auto">Come meet us</h2>
       </div>
@@ -495,7 +523,7 @@
         <div class="industry-copy">
           <h3>Join us at an upcoming industry event</h3>
           <p>Discover how technology is transforming industries at CES, Mobile World Congress, HIMSS, NRF, and other premier trade shows. Meet our experts in person and see live product demonstrations.</p>
-          <div><a class="btn btn-primary" href="#">Learn more</a></div>
+          <div><label for="popup-join" class="btn btn-primary cursor-pointer">Learn more</label></div>
         </div>
         <div class="industry-img">
           <img src="assets/img/misc/25.jpg" alt="Industry event booth" />
@@ -511,7 +539,7 @@
     <div class="container text-center">
       <h2 class="section-title mx-auto">Become a Sponsor</h2>
       <p class="section-desc mx-auto">Make your mark on the future of technology as a featured partner at EventoTN. Sponsorship opportunities offer unparalleled branding, reach, and connections through both in-person and online experiences.</p>
-      <a class="btn btn-primary" href="#">Learn more</a>
+      <label for="popup-sponsor" class="btn btn-primary cursor-pointer">Learn more</label>
     </div>
   </section>
 
@@ -521,7 +549,7 @@
        ============================================================ -->
   <section id="additional-learning" class="section section-white">
     <div class="container">
-      <div class="text-center" style="margin-bottom:2rem">
+      <div class="text-center mb-1">
         <p class="section-label">ADDITIONAL LEARNING</p>
         <h2 class="section-title mx-auto">Develop new skills</h2>
       </div>
@@ -561,7 +589,7 @@
        ============================================================ -->
   <section id="next-steps" class="section section-warm">
     <div class="container">
-      <div class="text-center" style="margin-bottom:2rem">
+      <div class="text-center mb-1">
         <p class="section-label">NEXT STEPS</p>
         <h2 class="section-title mx-auto">Select and plan your next event experience</h2>
       </div>
@@ -606,15 +634,15 @@
     <div class="container social-inner">
       <span class="social-label">Follow EventoTN</span>
       <div class="social-icons">
-        <a class="social-icon" href="#" aria-label="Facebook">
+        <label for="popup-social" class="social-icon cursor-pointer" aria-label="Facebook">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
-        </a>
-        <a class="social-icon" href="#" aria-label="X / Twitter">
+        </label>
+        <label for="popup-social" class="social-icon cursor-pointer" aria-label="X / Twitter">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a class="social-icon" href="#" aria-label="LinkedIn">
+        </label>
+        <label for="popup-social" class="social-icon cursor-pointer" aria-label="LinkedIn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
+        </label>
       </div>
     </div>
   </div>
