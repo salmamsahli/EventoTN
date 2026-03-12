@@ -1,3 +1,37 @@
+/* --- Popup Overlay Styles --- */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  transition: opacity 0.2s;
+}
+input.popup-checkbox:checked + .popup-overlay {
+  display: flex;
+}
+.popup-content {
+  background: var(--white);
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.15);
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow: auto;
+  text-align: center;
+}
+.popup-close {
+  display: inline-block;
+  margin-top: 1rem;
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  padding: .5rem 1rem;
+  cursor: pointer;
+}
 /* --- Utility Classes (added for inline style removal) --- */
 .mt-1 { margin-top: .5rem; }
 .mt-2 { margin-top: 1.5rem; }
